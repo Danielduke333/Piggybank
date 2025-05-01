@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piggy Bank</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="game-card">
+            <div class="banner">
+                <h1>Piggy Bank</h1>
+                <button class="close-button">✕</button>
+            </div>
+
+            <div class="welcome-message" id="welcome-message">
+                <div class="message-content">
+                    <h2>Welcome to Your Piggy Bank! 🎯</h2>
+                    <p>Start by entering your savings goal below</p>
+                </div>
+            </div>
+
+            <div class="piggybank-display">
+                <div class="floating-indicators" id="floating-indicators"></div>
+                <div class="piggybank-wrapper">
+                    <img src="data:image/svg+xml,%3Csvg width='200' height='200' viewBox='0 0 200 200' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M160 95c0 38.66-31.34 70-70 70s-70-31.34-70-70c0-38.66 31.34-70 70-70s70 31.34 70 70z' fill='%23FFB6C1'/%3E%3Cpath d='M25 95c0-35.9 29.1-65 65-65 35.9 0 65 29.1 65 65 0 35.9-29.1 65-65 65-35.9 0-65-29.1-65-65zm65-70c-38.66 0-70 31.34-70 70s31.34 70 70 70 70-31.34 70-70-31.34-70-70-70z' fill='%23FF69B4' fill-opacity='0.3'/%3E%3Cpath d='M45 100c0-8.28 6.72-15 15-15s15 6.72 15 15-6.72 15-15 15-15-6.72-15-15zm5 0c0 5.52 4.48 10 10 10s10-4.48 10-10-4.48-10-10-10-10 4.48-10 10z' fill='%23FF69B4'/%3E%3Cellipse cx='60' cy='100' rx='5' ry='5' fill='%23000'/%3E%3Cpath d='M125 100c0-8.28 6.72-15 15-15s15 6.72 15 15-6.72 15-15 15-15-6.72-15-15zm5 0c0 5.52 4.48 10 10 10s10-4.48 10-10-4.48-10-10-10-10 4.48-10 10z' fill='%23FF69B4'/%3E%3Cellipse cx='140' cy='100' rx='5' ry='5' fill='%23000'/%3E%3Cpath d='M85 120c8.28 0 15 6.72 15 15s-6.72 15-15 15-15-6.72-15-15 6.72-15 15-15z' fill='%23FF69B4'/%3E%3Cpath d='M90 75c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z' fill='%23FF69B4'/%3E%3Cpath d='M40 50c10-10 30-20 50-20' stroke='%23FF69B4' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M20 90c0-20 10-40 30-50' stroke='%23FF69B4' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M180 90c0-20-10-40-30-50' stroke='%23FF69B4' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M110 50c-10-10-30-20-50-20' stroke='%23FF69B4' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M85 140c0 2.76-2.24 5-5 5s-5-2.24-5-5 2.24-5 5-5 5 2.24 5 5z' fill='%23000'/%3E%3Cpath d='M95 130c0 5.52-4.48 10-10 10s-10-4.48-10-10h20z' fill='%23FF69B4'/%3E%3Cpath d='M75 125v-10c0-5.52 4.48-10 10-10s10 4.48 10 10v10' stroke='%23FF69B4' stroke-width='2'/%3E%3Cpath d='M15 95c0-2.76 2.24-5 5-5h10v10H20c-2.76 0-5-2.24-5-5z' fill='%23FFD700'/%3E%3C/svg%3E" alt="Cute Piggy Bank" class="piggy-image">
+                    <div class="coins-display">
+                        <img src="data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='20' cy='20' r='18' fill='%23FFD700' stroke='%23FF9900' stroke-width='2'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-family='Arial' font-size='16' fill='%23FF9900'%3E%24%3C/text%3E%3C/svg%3E" alt="Coin" class="coin-icon">
+                        <span id="savings-amount">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="savings-controls">
+                <div class="input-group">
+                    <select id="currency" class="currency-select">
+                        <option value="₹" selected>INR (₹)</option>
+                        <option value="$">USD ($)</option>
+                        <option value="€">EUR (€)</option>
+                        <option value="£">GBP (£)</option>
+                        <option value="¥">JPY (¥)</option>
+                    </select>
+                    <input type="number" id="goal" min="0" max="10000" placeholder="Set your goal (max: 10,000)">
+                </div>
+
+                <div class="slider-container">
+                    <div class="slider-wrapper">
+                        <input type="range" id="savings-slider" min="0" value="0" step="1" disabled>
+                    </div>
+                    <div class="progress-markers">
+                        <span id="savings-percentage">0%</span>
+                        <span class="goal-amount" id="goal-display">Goal: 0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="celebration-message" id="celebration-message">
+                🎉 Congratulations! You've reached your goal! 🎉
+            </div>
+
+            <div class="custom-popup" id="custom-popup">
+                <div class="popup-content">
+                    <span class="popup-message">Maximum savings goal is 10,000!</span>
+                    <button class="popup-close">✕</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html> 
